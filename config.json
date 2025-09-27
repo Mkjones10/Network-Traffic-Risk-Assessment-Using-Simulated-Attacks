@@ -1,0 +1,29 @@
+{
+  "db_path": "network_logs.db",
+  "bpf_filter": "ip",
+  "sniff_interface": null, 
+  "safe_mode": false,
+"allowed_targets": ["10.0.0.95"],
+  "risk": {
+  "likelihood": {
+    "SYN_FLOOD": 0.9,
+    "UDP_ATTACK": 0.7,
+    "ICMP_SWEEP": 0.5,
+    "SLOWLORIS": 1.0,
+    "DNS_FLOOD": 0.95,
+    "FTP_ANON": 1.0,
+    "TLS_WEAK": 0.9
+  },
+  "bucket_thresholds": {
+    "LOW": 25,
+    "MEDIUM": 50,
+    "HIGH": 75
+  }
+},
+  "assets": [
+    { "cidr": "127.0.0.1/32", "criticality": "CRITICAL", "owner": "LocalHost" },
+    { "cidr": "10.0.0.0/24", "criticality": "HIGH", "owner": "Prod LAN" },
+    { "cidr": "192.168.1.0/24", "criticality": "MEDIUM", "owner": "Lab" },
+    { "cidr": "0.0.0.0/0", "criticality": "LOW", "owner": "Internet" }
+  ]
+}
