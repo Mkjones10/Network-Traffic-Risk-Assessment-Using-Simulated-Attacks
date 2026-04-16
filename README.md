@@ -1,200 +1,234 @@
-Network Traffic Risk Assessment using Simulated Attacks
+# Network Traffic Risk Assessment & Attack Simulation Framework
 
-SAFETY & DISCLAIMER (Read first)
-This code is for educational and research purposes only. Do not run it on production systems, public networks, or any environment where you do not have explicit permission. Always restrict usage to controlled lab environments. Running attack simulations may require root/administrator privileges — use caution. Never commit sensitive files (like .secrets.json) to version control.
+>  **SAFETY & DISCLAIMER — Read First**
+>
+> This project is for **educational and research purposes only**. Do **not** run it on production systems, public networks, or any environment where you do not have explicit written permission. Always restrict usage to controlled lab environments. Some modules require administrator/root privileges. **Never commit sensitive files (like `.secrets.json`) to version control.**
 
-Overview
+---
 
-This project simulates common network attacks, captures packets in real-time, scores risks using a likelihood × impact model, and generates executive reports aligned with the NIST Cybersecurity Framework (CSF).
+## Overview
 
-The system is designed as a learning and demonstration tool for network security, not for use on production networks.
+This project simulates real-world network attacks, captures live traffic, and transforms raw packet data into risk-based security insights.
 
-Features
+It demonstrates how a Security Operations Center (SOC) can move from:
 
-Attack Simulation Modules
+**Detection → Analysis → Risk Prioritization → Executive Reporting**
 
-SYN Flood
+aligned with the **NIST Cybersecurity Framework (CSF)**.
 
-UDP Flood
+> Designed for learning, demonstration, and portfolio use — not for production deployment.
 
-DNS Flood
+---
 
-ICMP Sweep
+## Core Capabilities
 
-Slowloris
+###  Attack Simulation
+Simulates common network-based threats:
+- SYN Flood
+- UDP Flood
+- DNS Flood
+- ICMP Sweep
+- Slowloris
+- FTP Anonymous Login
+- Weak TLS Handshake
 
-FTP Anonymous Login
+###  Packet Capture & Analysis
+- Real-time packet sniffing via [Scapy](https://scapy.net/)
+- Captures and logs network metadata
+- Supports validation with Wireshark
+- Enables protocol-level traffic inspection
 
-Weak TLS Handshake
+###  Risk Scoring Engine
+- **Likelihood × Impact** model
+- Severity classification: Very Low → Very High
+- NIST-aligned risk prioritization
+- Converts raw detections into actionable risk insights
 
-Packet Capture
+###  Data Layer
+- SQLite-backed storage for packet logs, alerts, risk scores, and asset data
 
-Uses Scapy to sniff traffic and log packet metadata.
+###  Executive Reporting
+Generates `executive_report.md` with:
+- Severity distribution
+- Attack event counts
+- Top 5 risk findings
+- Mitigation strategies mapped to NIST CSF
 
-Applies NIST-aligned risk scoring.
+---
 
-Database
+## Architecture
 
-SQLite database stores packets, risks, alerts, and assets.
+```
+Attack Simulation → Packet Capture (Scapy) → Risk Engine → SQLite DB → Executive Report
+```
 
-Reporting
+---
 
-Executive reports with severity breakdowns, top findings, and mitigation strategies.
+## Project Structure
 
-Project Structure
+```
 ├── attacks/
-
-│     ├── dns_flood.py
-
-│     ├── ftp_anonymous.py
-
-│     ├── ping_sweep.py
-
-│     ├── slowloris.py
-
-│     ├── syn_flood.py
-
-│     ├── tls_weakcheck.py
-
-│     └── udp_flood.py
-
-
-│
+│   ├── dns_flood.py
+│   ├── ftp_anonymous.py
+│   ├── ping_sweep.py
+│   ├── slowloris.py
+│   ├── syn_flood.py
+│   ├── tls_weakcheck.py
+│   └── udp_flood.py
 ├── baseline_tests.py
-
 ├── clear_all_dbs.py
-
 ├── db_packets.py
-
 ├── db_utils.py
-
 ├── packet_logger.py
-
 ├── report_generator.py
-
 ├── risk_engine.py
-
 ├── run_all_attacks.py
-
 ├── secrets_loader.py
+└── security_scan.py
+```
 
-├── security_scan.py
+---
 
+## Setup & Usage
 
+### 1. Install Dependencies
 
+```bash
+pip install scapy
+```
 
+### 2. Configure Secrets
 
-Secrets File Requirement (PLACEHOLDERS — DO NOT commit real secrets)
+Create a `.secrets.json` file in the project root. **Add it to `.gitignore` immediately — never commit real values.**
 
-You must create a .secrets.json file in the project root with your own IP address, MAC address, and network interface. Do not commit this file to version control. Use the example below and replace the placeholder values with your actual values:
-
+```json
 {
   "MY_IP": "YOUR_IP_ADDRESS",
   "MY_MAC": "YOUR_MAC_ADDRESS",
   "MY_IFACE": "YOUR_INTERFACE_NAME"
 }
+```
 
+| Key | Description | Example |
+|---|---|---|
+| `MY_IP` | IP of the machine running the tests | `192.168.1.50` |
+| `MY_MAC` | NIC MAC address | `00:11:22:33:44:55` |
+| `MY_IFACE` | Network interface name | `eth0`, `wlan0`, `Wi-Fi` |
 
-MY_IP: replace YOUR_IP_ADDRESS with the IP address of the machine you will run the tests on (example format: 192.168.1.50).
+> Tested on a Wi-Fi adapter. For Ethernet or virtual adapters, update `MY_IFACE` and run with elevated privileges if needed.
 
-MY_MAC: replace YOUR_MAC_ADDRESS with your NIC MAC address (example format: 00:11:22:33:44:55).
+### 3. Initialize Database
 
-MY_IFACE: replace YOUR_INTERFACE_NAME with your interface name (e.g., Wi-Fi, eth0, wlan0).
-
-Important: Treat .secrets.json like a secret — add it to .gitignore so it does not get pushed to GitHub.
-Note: This project was tested using a Wi-Fi interface. Running on other interfaces (Ethernet, virtual adapters) may require adjusting the MY_IFACE value and/or running with elevated privileges.
-
-Usage
-
-Install dependencies (Python 3.x, Scapy):
-
-pip install scapy
-
-
-Create .secrets.json using the placeholder template above and fill with your local values.
-
-Initialize databases (creates SQLite tables):
-
+```bash
 python db_utils.py
+```
 
+### 4. Run Simulated Attacks *(Lab environments only)*
 
-Run all simulated attacks (lab only — ensure you have permission):
-
+```bash
 python run_all_attacks.py
+```
 
+This will start packet logging, execute all attack modules, and store and score events.
 
-This script starts the packet logger, runs each attack module, and logs scored events.
+### 5. Generate Executive Report
 
-Generate risk report:
-
+```bash
 python report_generator.py
+```
 
+Output: `executive_report.md`
 
-Output file: executive_report.md
+### 6. Reset Database *(Optional)*
 
-Optional: clear DBs between runs:
-
+```bash
 python clear_all_dbs.py
+```
 
-Verify attacks in Wireshark (placeholders — replace before using)
+---
 
-Use these Wireshark display filters to verify simulated attacks. Before using, replace YOUR_IP_ADDRESS with the IP you put in .secrets.json, and YOUR_MAC_ADDRESS with the MAC you put in .secrets.json. Example placeholders are shown below — do not use any real values in the README file.
+## Wireshark Validation Filters
 
-SYN Flood
+Replace all placeholders with values from your `.secrets.json` before use.
 
-ip.dst == YOUR_IP_ADDRESS and tcp.flags.syn == 1 and tcp.flags.ack == 0
+| Attack | Wireshark Filter |
+|---|---|
+| SYN Flood | `ip.dst == YOUR_IP_ADDRESS and tcp.flags.syn == 1 and tcp.flags.ack == 0` |
+| UDP Flood | `ip.dst == YOUR_IP_ADDRESS and udp and not dns` |
+| DNS Flood | `ip.dst == YOUR_IP_ADDRESS and udp.port == 53 and dns` |
+| ICMP Sweep | `icmp.type == 8 and ip.dst >= YOUR_SUBNET_START and ip.dst <= YOUR_SUBNET_END` |
+| Slowloris | `ip.dst == YOUR_IP_ADDRESS and tcp.port == 8080 and tcp.len < 50` |
+| FTP Anonymous Login | `ip.dst == YOUR_IP_ADDRESS and tcp.port == 21 and ftp.request.command == "USER"` |
+| Weak TLS Handshake | `ip.dst == YOUR_IP_ADDRESS and tcp.port == 443 and tls.handshake.version == 0x0301` |
 
-
-UDP Flood
-
-ip.dst == YOUR_IP_ADDRESS and udp and not dns
-
-
-DNS Flood
-
-ip.dst == YOUR_IP_ADDRESS and udp.port == 53 and dns
-
-
-ICMP Sweep
-
-icmp.type == 8 and ip.dst >= YOUR_SUBNET_START and ip.dst <= YOUR_SUBNET_END
-
-
-(Replace YOUR_SUBNET_START / YOUR_SUBNET_END with numeric addresses, e.g. 10.0.0.90 and 10.0.0.95.)
-
-Slowloris
-
-ip.dst == YOUR_IP_ADDRESS and tcp.port == 8080 and tcp.len < 50
-
-
-FTP Anonymous Login
-
-ip.dst == YOUR_IP_ADDRESS and tcp.port == 21 and ftp.request.command == "USER"
-
-
-Weak TLS Handshake
-
-ip.dst == YOUR_IP_ADDRESS and tcp.port == 443 and tls.handshake.version == 0x0301
-
-
-Tip: If you want to filter by attacker MAC, add:
-
+To also filter by attacker MAC:
+```
 eth.src == YOUR_MAC_ADDRESS
+```
 
-Example Output (Executive Report)
+> Replace `YOUR_SUBNET_START` / `YOUR_SUBNET_END` with numeric addresses, e.g. `10.0.0.90` and `10.0.0.95`.
 
-Severity breakdown (Very Low → Very High)
+---
 
-Attack event counts
+## Example Report Output
 
-Top 5 findings with risk scores
+The generated `executive_report.md` includes:
+- Severity breakdown (Very Low → Very High)
+- Attack event counts
+- Top 5 findings with risk scores
+- Likelihood × Impact analysis
+- NIST CSF–aligned mitigation recommendations
 
-Mitigation recommendations mapped to NIST CSF
+---
 
-Troubleshooting & Notes
+## Troubleshooting
 
-If Scapy cannot send raw frames or sniff on your interface, run scripts with elevated privileges (e.g., sudo on Linux/macOS).
+**Permission errors**
+```bash
+sudo python run_all_attacks.py
+```
 
-If .secrets.json is missing or malformed, secrets_loader.py will raise an error — check the path and JSON formatting.
+**Scapy sniffing issues** — Verify `MY_IFACE` is correct and your adapter supports packet sniffing.
 
-The project was validated on a Wi-Fi adapter; if you test on another interface, set MY_IFACE accordingly.
+**Secrets file errors** — Check JSON formatting and confirm `.secrets.json` is in the project root.
+
+---
+
+## .gitignore Recommendation
+
+```
+.secrets.json
+*.db
+```
+
+---
+
+## Why This Project Stands Out
+
+This project directly demonstrates skills required for **SOC Analyst**, **Incident Response**, and **Cybersecurity Analyst** roles:
+
+- Network traffic analysis at the packet level
+- Attack simulation and detection
+- Risk-based prioritization (beyond simple alerting)
+- NIST CSF alignment for enterprise relevance
+- Executive-level reporting of technical findings
+
+---
+
+## Future Enhancements
+
+- [ ] SIEM integration (Splunk / ELK)
+- [ ] Real-time alert dashboard (web UI)
+- [ ] MITRE ATT&CK mapping
+- [ ] ML-based anomaly detection
+- [ ] Automated alert correlation
+
+---
+
+## Author
+
+**Maxine Jones**
+*Cybersecurity Analyst | Incident Response | Network Security*
+
+-  Portfolio: [maxine-jones-portfolio.netlify.app](https://maxine-jones-portfolio.netlify.app/)
+-  GitHub: [github.com/Mkjones10](https://github.com/Mkjones10)
