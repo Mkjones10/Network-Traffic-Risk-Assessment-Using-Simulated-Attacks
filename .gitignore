@@ -1,5 +1,21 @@
-# Secrets file
-.secrets.json
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
 ml-network-env/
-*.db
+venv/
+env/
+
+# Secrets
 .secrets.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+
+
