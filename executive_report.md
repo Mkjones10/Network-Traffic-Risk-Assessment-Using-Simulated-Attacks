@@ -1,138 +1,393 @@
-# Network Risk Assessment — Executive Brief
+# Network Traffic Risk Assessment
+## Executive Report
 
-_Generated 2025-09-26 20:42:11_
+**Generated:** 2026-04-17 23:25:16  
+**Framework:** NIST SP 800-30 Rev. 1 — Qualitative Risk Scoring  
+**Threat Intel:** MITRE ATT&CK Enterprise Matrix  
 
+---
 
-*Risk categories follow NIST SP 800-30 (Very Low → Very High).*
+## Risk Scoring Methodology
+
+Risk scores are calculated using a qualitative likelihood x impact model, normalised to a 0-100 scale.
+
+| Score Range | Severity Level | Recommended Response                   |
+|-------------|----------------|----------------------------------------|
+| 80 - 100    | Very High      | Immediate remediation required          |
+| 60 - 79     | High           | Prioritise remediation within 24 hours  |
+| 40 - 59     | Medium         | Schedule remediation within 7 days      |
+| 20 - 39     | Low            | Monitor and review                      |
+| 0  - 19     | Very Low       | Informational — log and retain          |
+
+---
 
 ## Risk Severity Overview
-![](report_figures\severity.png)
+
+![](report_figures/severity.png)
 
 ## Attack Event Breakdown
-![](report_figures\attacks.png)
 
-## Raw Packet Breakdown
-![](report_figures\packets.png)
+![](report_figures/attacks.png)
 
-## Top 5 Findings
-- **SLOWLORIS** ATTACKER → 10.0.0.95 at 2025-09-22 08:45:35: **Score 75.0** (Finished Slowloris)
-- **FTP_ANON** ATTACKER → 10.0.0.95 at 2025-09-22 08:45:35: **Score 75.0** (Finished FTP anonymous test)
-- **DNS_FLOOD** 10.39.183.108 → 10.0.0.95 at 2025-09-22 08:45:35: **Score 71.2** (DNS query/response)
-- **DNS_FLOOD** 10.190.7.200 → 10.0.0.95 at 2025-09-22 08:45:35: **Score 71.2** (DNS query/response)
-- **DNS_FLOOD** 10.32.50.228 → 10.0.0.95 at 2025-09-22 08:45:35: **Score 71.2** (DNS query/response)
+## Raw Packet Distribution
 
-## Recent Events (last 50)
-- 2025-09-22 08:45:40: UDP_FLOOD 192.168.1.201 → 239.255.255.250 (Score 12.5) — UDP packet
-- 2025-09-22 08:45:40: UDP_FLOOD 192.168.1.200 → 239.255.255.250 (Score 12.5) — UDP packet
-- 2025-09-22 08:45:39: DNS_FLOOD UNKNOWN → UNKNOWN (Score 47.5) — DNS query/response
-- 2025-09-22 08:45:39: DNS_FLOOD 192.168.1.209 → 224.0.0.251 (Score 23.8) — DNS query/response
-- 2025-09-22 08:45:37: UDP_FLOOD 192.168.1.252 → 239.255.255.250 (Score 12.5) — UDP packet
-- 2025-09-22 08:45:37: UDP_FLOOD 192.168.1.248 → 239.255.255.250 (Score 12.5) — UDP packet
-- 2025-09-22 08:45:37: UDP_FLOOD 192.168.1.77 → 192.168.1.255 (Score 25.0) — UDP packet
-- 2025-09-22 08:45:37: UDP_FLOOD 192.168.1.201 → 239.255.255.250 (Score 12.5) — UDP packet
-- 2025-09-22 08:45:36: UDP_FLOOD 192.168.1.200 → 239.255.255.250 (Score 12.5) — UDP packet
-- 2025-09-22 08:45:36: UDP_FLOOD 192.168.1.77 → 192.168.1.255 (Score 25.0) — UDP packet
-- 2025-09-22 08:45:36: DNS_FLOOD UNKNOWN → UNKNOWN (Score 47.5) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 192.168.1.209 → 224.0.0.251 (Score 23.8) — DNS query/response
-- 2025-09-22 08:45:36: UDP_FLOOD 192.168.1.77 → 192.168.1.255 (Score 25.0) — UDP packet
-- 2025-09-22 08:45:36: DNS_FLOOD 10.76.248.152 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.13.254.36 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.75.152.19 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.167.182.170 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.191.227.79 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.154.16.110 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.193.126.14 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.17.180.108 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.43.231.156 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.167.5.48 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.166.101.19 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.20.87.18 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.107.89.44 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.114.114.186 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:36: DNS_FLOOD 10.192.58.129 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.123.31.221 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.143.142.43 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.19.34.195 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.211.33.214 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.235.44.239 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.49.31.131 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.179.109.203 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.30.104.2 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.17.45.137 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.146.42.120 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.235.177.226 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.165.181.195 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.126.224.130 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.7.143.122 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.48.196.165 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.163.64.4 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.74.149.216 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.151.18.66 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.79.237.224 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: DNS_FLOOD 10.242.61.148 → 10.0.0.95 (Score 71.2) — DNS query/response
-- 2025-09-22 08:45:35: TLS_WEAK ATTACKER → 10.0.0.95 (Score 67.5) — Finished TLS weak check
-- 2025-09-22 08:45:35: DNS_FLOOD 10.152.7.187 → 10.0.0.95 (Score 71.2) — DNS query/response
+![](report_figures/packets.png)
+
+---
+
+## Top 5 Risk Findings
+
+### Finding 1 — DNS Flood
+
+| Field          | Detail                   |
+|----------------|--------------------------|
+| Timestamp      | 2026-04-17 23:24:36               |
+| Source IP      | ATTACKER                    |
+| Destination IP | 172.24.149.49                    |
+| Risk Score     | 80.0 / 100            |
+| Severity       | Very High               |
+| Notes          | Finished DNS Flood                  |
+
+**MITRE ATT&CK — Primary Technique**
+
+| Field     | Detail                                      |
+|-----------|---------------------------------------------|
+| ID        | [T1498](https://attack.mitre.org/techniques/T1498)     |
+| Technique | Network Denial of Service                         |
+| Tactic    | Impact                       |
+
+**MITRE ATT&CK — Secondary Techniques**
+
+| ID | Technique | Tactic |
+|---|---|---|
+| [T1595](https://attack.mitre.org/techniques/T1595) | Active Scanning | Reconnaissance |
+
+### Finding 2 — UDP Flood
+
+| Field          | Detail                   |
+|----------------|--------------------------|
+| Timestamp      | 2026-04-17 23:24:08               |
+| Source IP      | ATTACKER                    |
+| Destination IP | 172.24.149.49                    |
+| Risk Score     | 80.0 / 100            |
+| Severity       | Very High               |
+| Notes          | Finished UDP Flood                  |
+
+**MITRE ATT&CK — Primary Technique**
+
+| Field     | Detail                                      |
+|-----------|---------------------------------------------|
+| ID        | [T1498](https://attack.mitre.org/techniques/T1498)     |
+| Technique | Network Denial of Service                         |
+| Tactic    | Impact                       |
+
+### Finding 3 — SYN Flood
+
+| Field          | Detail                   |
+|----------------|--------------------------|
+| Timestamp      | 2026-04-17 23:23:54               |
+| Source IP      | ATTACKER                    |
+| Destination IP | 172.24.149.49                    |
+| Risk Score     | 80.0 / 100            |
+| Severity       | Very High               |
+| Notes          | Finished SYN Flood                  |
+
+**MITRE ATT&CK — Primary Technique**
+
+| Field     | Detail                                      |
+|-----------|---------------------------------------------|
+| ID        | [T1498](https://attack.mitre.org/techniques/T1498)     |
+| Technique | Network Denial of Service                         |
+| Tactic    | Impact                       |
+
+### Finding 4 — DNS Flood
+
+| Field          | Detail                   |
+|----------------|--------------------------|
+| Timestamp      | 2026-04-17 23:24:36               |
+| Source IP      | 10.248.132.116                    |
+| Destination IP | 172.24.149.49                    |
+| Risk Score     | 64.0 / 100            |
+| Severity       | High               |
+| Notes          | DNS query/response                  |
+
+**MITRE ATT&CK — Primary Technique**
+
+| Field     | Detail                                      |
+|-----------|---------------------------------------------|
+| ID        | [T1498](https://attack.mitre.org/techniques/T1498)     |
+| Technique | Network Denial of Service                         |
+| Tactic    | Impact                       |
+
+**MITRE ATT&CK — Secondary Techniques**
+
+| ID | Technique | Tactic |
+|---|---|---|
+| [T1595](https://attack.mitre.org/techniques/T1595) | Active Scanning | Reconnaissance |
+
+### Finding 5 — DNS Flood
+
+| Field          | Detail                   |
+|----------------|--------------------------|
+| Timestamp      | 2026-04-17 23:24:36               |
+| Source IP      | 10.182.201.3                    |
+| Destination IP | 172.24.149.49                    |
+| Risk Score     | 64.0 / 100            |
+| Severity       | High               |
+| Notes          | DNS query/response                  |
+
+**MITRE ATT&CK — Primary Technique**
+
+| Field     | Detail                                      |
+|-----------|---------------------------------------------|
+| ID        | [T1498](https://attack.mitre.org/techniques/T1498)     |
+| Technique | Network Denial of Service                         |
+| Tactic    | Impact                       |
+
+**MITRE ATT&CK — Secondary Techniques**
+
+| ID | Technique | Tactic |
+|---|---|---|
+| [T1595](https://attack.mitre.org/techniques/T1595) | Active Scanning | Reconnaissance |
+
+---
+
+## Recent Events (Last 50)
+
+| Timestamp | Attack Type | Source IP | Destination IP | Score | Severity | MITRE ID | Tactic |
+|---|---|---|---|---|---|---|---|
+| 2026-04-17 23:24:36 | Weak TLS Configuration | ATTACKER | 172.24.149.49 | 12.0 | Very Low | [T1562.010](https://attack.mitre.org/techniques/T1562/010) | Defense Evasion |
+| 2026-04-17 23:24:36 | Anonymous FTP Access | ATTACKER | 172.24.149.49 | 32.0 | Medium | [T1133](https://attack.mitre.org/techniques/T1133) | Initial Access |
+| 2026-04-17 23:24:36 | DNS Flood | ATTACKER | 172.24.149.49 | 80.0 | Very High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.194.253.51 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.253.228.102 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.117.211.151 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.240.193.32 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.212.114.176 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.196.28.68 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.90.252.70 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.21.198.221 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.153.96.29 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.176.177.45 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.189.55.5 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.219.72.223 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.210.241.95 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.178.41.100 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.182.201.3 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:36 | DNS Flood | 10.248.132.116 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.42.97.83 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.157.133.150 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.88.41.167 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.142.24.200 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.255.146.126 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.142.158.128 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.145.12.39 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.101.8.151 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.44.252.248 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.84.159.152 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.71.222.51 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.101.228.30 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.82.253.172 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.56.248.116 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.231.111.83 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.220.155.20 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.140.102.225 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.104.142.204 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.65.156.139 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.176.223.229 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.160.97.162 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.90.193.90 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:35 | DNS Flood | 10.31.100.234 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:34 | DNS Flood | 10.176.100.105 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:34 | DNS Flood | 10.41.249.194 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:34 | DNS Flood | 10.183.174.31 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:34 | DNS Flood | 10.85.79.26 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:34 | DNS Flood | 10.88.16.217 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:34 | DNS Flood | 10.236.21.184 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:34 | DNS Flood | 10.102.106.240 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+| 2026-04-17 23:24:34 | DNS Flood | 10.187.109.164 | 172.24.149.49 | 64.0 | High | [T1498](https://attack.mitre.org/techniques/T1498) | Impact |
+
+---
 
 ## Mitigation Recommendations
 
-### DNS_FLOOD
-**Mitigation Steps:**
-- Rate limit incoming DNS queries.
-- Use DNS rate-limiting extensions (RRL).
-- Harden recursive resolvers and deploy DNSSEC.
-**NIST CSF Alignment:**
-- Function: Protect (PR), Detect (DE), Respond (RS)
-- Categories: PR.PT-4 (communications protections), DE.CM-1 (DNS anomaly detection), RS.MI-1 (mitigation actions)
+Recommendations are mapped to NIST CSF functions and MITRE ATT&CK techniques.
 
-### UDP_FLOOD
-**Mitigation Steps:**
-- Rate limit UDP traffic.
-- Filter unused UDP ports at the firewall.
-- Deploy DDoS protection services.
-**NIST CSF Alignment:**
-- Function: Protect (PR), Detect (DE), Respond (RS)
-- Categories: PR.PT-4 (network protections), DE.CM-7 (unauthorized connections), RS.AN-1 (incident analysis)
+### SYN Flood
 
-### SYN_FLOOD
-**Mitigation Steps:**
-- Enable SYN cookies on the host.
-- Apply rate limiting for TCP connections.
-- Use a firewall/IDS to detect and block floods.
-**NIST CSF Alignment:**
-- Function: Protect (PR), Detect (DE)
-- Categories: PR.AC-5 (network integrity), DE.CM-1 (network monitoring)
+**MITRE ATT&CK**
 
-### ICMP_SWEEP
-**Mitigation Steps:**
-- Disable ICMP responses on sensitive hosts.
-- Limit ICMP echo requests using firewall rules.
-**NIST CSF Alignment:**
-- Function: Detect (DE)
-- Categories: DE.CM-1 (network monitoring), DE.CM-7 (scan detection)
+| Field        | Detail                                      |
+|--------------|---------------------------------------------|
+| Primary ID   | [T1498](https://attack.mitre.org/techniques/T1498)     |
+| Technique    | Network Denial of Service                         |
+| Tactic       | Impact                       |
 
-### SLOWLORIS
-**Mitigation Steps:**
-- Use a reverse proxy (e.g., Nginx/HAProxy) with request timeouts.
-- Limit max concurrent connections per client.
-- Enable connection keep-alive limits.
-**NIST CSF Alignment:**
-- Function: Protect (PR), Detect (DE), Respond (RS)
-- Categories: PR.AC-5 (application resilience), DE.CM-1 (connection anomaly detection), RS.MI-1 (mitigation)
+**Mitigation Steps**
 
-### FTP_ANON
-**Mitigation Steps:**
-- Disable anonymous FTP logins.
-- Use SFTP/FTPS instead of FTP.
-- Restrict FTP access to trusted IPs only.
-**NIST CSF Alignment:**
-- Function: Protect (PR), Detect (DE)
-- Categories: PR.AC-1 (identity management), PR.AC-3 (remote access), DE.CM-3 (activity monitoring)
+- Enable SYN cookies on all exposed hosts.
+- Apply rate limiting for inbound TCP SYN connections at the firewall.
+- Deploy an IDS/IPS rule to detect and block SYN flood patterns.
+- Consider upstream DDoS scrubbing or a cloud-based DDoS protection service.
 
-### TLS_WEAK
-**Mitigation Steps:**
-- Disable SSLv2/SSLv3, TLS 1.0, and weak ciphers.
-- Enforce TLS 1.2 or 1.3 with strong cipher suites.
-- Use properly signed certificates with modern algorithms.
-**NIST CSF Alignment:**
-- Function: Protect (PR), Detect (DE)
-- Categories: PR.DS-2 (data-in-transit protection), PR.AC-5 (integrity), DE.CM-8 (vulnerability scanning)
+**NIST CSF Alignment**
+
+- PR.AC-5  — Network integrity protection
+- DE.CM-1  — Continuous network monitoring
+- RS.MI-1  — Incident mitigation actions
+
+---
+
+### UDP Flood
+
+**MITRE ATT&CK**
+
+| Field        | Detail                                      |
+|--------------|---------------------------------------------|
+| Primary ID   | [T1498](https://attack.mitre.org/techniques/T1498)     |
+| Technique    | Network Denial of Service                         |
+| Tactic       | Impact                       |
+
+**Mitigation Steps**
+
+- Rate-limit inbound UDP traffic at the perimeter firewall.
+- Block unused UDP ports to reduce the attack surface.
+- Deploy a DDoS protection service capable of absorbing volumetric floods.
+- Enable anomaly-based detection for UDP traffic spikes.
+
+**NIST CSF Alignment**
+
+- PR.PT-4  — Communications and control network protection
+- DE.CM-7  — Detection of unauthorized connections
+- RS.AN-1  — Incident analysis
+
+---
+
+### ICMP Sweep
+
+**MITRE ATT&CK**
+
+| Field        | Detail                                      |
+|--------------|---------------------------------------------|
+| Primary ID   | [T1018](https://attack.mitre.org/techniques/T1018)     |
+| Technique    | Remote System Discovery                         |
+| Tactic       | Discovery                       |
+| Secondary ID | [T1595.001](https://attack.mitre.org/techniques/T1595/001) — Scanning IP Blocks (Reconnaissance) |
+
+**Mitigation Steps**
+
+- Restrict ICMP echo requests on sensitive hosts via firewall ACLs.
+- Enable network scanning detection rules in your IDS/IPS.
+- Log and alert on ICMP traffic exceeding baseline thresholds.
+
+**NIST CSF Alignment**
+
+- DE.CM-1  — Network monitoring
+- DE.CM-7  — Unauthorized scan detection
+
+---
+
+### Slowloris (HTTP Keep-Alive Exhaustion)
+
+**MITRE ATT&CK**
+
+| Field        | Detail                                      |
+|--------------|---------------------------------------------|
+| Primary ID   | [T1499](https://attack.mitre.org/techniques/T1499)     |
+| Technique    | Endpoint Denial of Service                         |
+| Tactic       | Impact                       |
+| Secondary ID | [T1498](https://attack.mitre.org/techniques/T1498) — Network Denial of Service (Impact) |
+
+**Mitigation Steps**
+
+- Place a reverse proxy (Nginx or HAProxy) in front of all web services.
+- Configure aggressive request timeout and keep-alive limits.
+- Enforce maximum concurrent connection limits per source IP.
+- Enable connection rate limiting at the load balancer.
+
+**NIST CSF Alignment**
+
+- PR.AC-5  — Application resilience and network integrity
+- DE.CM-1  — Connection anomaly detection
+- RS.MI-1  — Mitigation of detected incidents
+
+---
+
+### DNS Flood
+
+**MITRE ATT&CK**
+
+| Field        | Detail                                      |
+|--------------|---------------------------------------------|
+| Primary ID   | [T1498](https://attack.mitre.org/techniques/T1498)     |
+| Technique    | Network Denial of Service                         |
+| Tactic       | Impact                       |
+| Secondary ID | [T1595](https://attack.mitre.org/techniques/T1595) — Active Scanning (Reconnaissance) |
+
+**Mitigation Steps**
+
+- Enable DNS Response Rate Limiting (RRL) on all resolvers.
+- Deploy DNSSEC to authenticate DNS responses.
+- Rate-limit inbound DNS queries at the network perimeter.
+- Harden recursive resolvers and restrict open resolution.
+
+**NIST CSF Alignment**
+
+- PR.PT-4  — Communications protections
+- DE.CM-1  — DNS anomaly detection
+- RS.MI-1  — Mitigation actions
+
+---
+
+### Anonymous FTP Access
+
+**MITRE ATT&CK**
+
+| Field        | Detail                                      |
+|--------------|---------------------------------------------|
+| Primary ID   | [T1133](https://attack.mitre.org/techniques/T1133)     |
+| Technique    | External Remote Services                         |
+| Tactic       | Initial Access                       |
+| Secondary ID | [T1078](https://attack.mitre.org/techniques/T1078) — Valid Accounts (Defense Evasion / Persistence) |
+
+**Mitigation Steps**
+
+- Disable anonymous FTP login on all servers immediately.
+- Replace FTP with SFTP or FTPS for all file transfer requirements.
+- Restrict FTP access to explicitly approved source IP addresses.
+- Audit FTP server logs for historical anonymous access attempts.
+
+**NIST CSF Alignment**
+
+- PR.AC-1  — Identity and credential management
+- PR.AC-3  — Remote access management
+- DE.CM-3  — Personnel and user activity monitoring
+
+---
+
+### Weak TLS Configuration
+
+**MITRE ATT&CK**
+
+| Field        | Detail                                      |
+|--------------|---------------------------------------------|
+| Primary ID   | [T1562.010](https://attack.mitre.org/techniques/T1562/010)     |
+| Technique    | Downgrade Attack                         |
+| Tactic       | Defense Evasion                       |
+| Secondary ID | [T1040](https://attack.mitre.org/techniques/T1040) — Network Sniffing (Credential Access / Discovery) |
+
+**Mitigation Steps**
+
+- Disable SSLv2, SSLv3, TLS 1.0, and TLS 1.1 across all services.
+- Enforce TLS 1.2 at minimum; prefer TLS 1.3.
+- Remove weak cipher suites (RC4, DES, 3DES, export-grade ciphers).
+- Rotate to certificates signed with SHA-256 or stronger algorithms.
+- Run regular TLS configuration scans (e.g., testssl.sh or SSLLabs).
+
+**NIST CSF Alignment**
+
+- PR.DS-2  — Data-in-transit protection
+- PR.AC-5  — Network integrity
+- DE.CM-8  — Vulnerability scanning
+
+---
